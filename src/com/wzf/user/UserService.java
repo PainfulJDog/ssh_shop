@@ -49,5 +49,10 @@ public class UserService {
 		// TODO Auto-generated method stub
 		return userDao.findByUsername(username);
 	}
+
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return userDao.findByEmail(email);
+	}
 	
 }

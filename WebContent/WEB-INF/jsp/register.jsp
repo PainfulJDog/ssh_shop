@@ -35,7 +35,12 @@
 
 	function checkUsername(){
 		var username=$("#username").val();
-		$("#span1").load("${pageContext.request.contextPath}/user_checkUsername.action?timestamp="+new Date().getTime(),{'username':username});
+		$("#span_username").load("${pageContext.request.contextPath}/user_checkUsername.action?timestamp="+new Date().getTime(),{'username':username});
+		}
+	
+	function checkEmail(){
+		var email=$("#email").val();
+		$("#span_email").load("${pageContext.request.contextPath}/user_checkEmail.action?timestamp="+new Date().getTime(),{'email':email});
 		}
 	
 // 	function checkUsername(){
@@ -203,7 +208,7 @@
 									<span class="requiredField">*</span>用户名:
 								</th>
 								<td>
-									<input type="text" id="username" name="username" class="text" maxlength="20" onblur="checkUsername()"/><span id="span1"></span><s:fielderror fieldName="username"></s:fielderror>
+									<input type="text" id="username" name="username" class="text" maxlength="20" onblur="checkUsername()"/><span id="span_username"></span><s:fielderror fieldName="username"></s:fielderror>
 								</td>
 							</tr>
 							<tr>
@@ -227,7 +232,7 @@
 									<span class="requiredField">*</span>E-mail:
 								</th>
 								<td>
-									<input type="text" id="email" name="email" class="text" maxlength="200"><s:fielderror fieldName="email"></s:fielderror>
+									<input type="text" id="email" name="email" class="text" maxlength="200" onblur="checkEmail();"><span id="span_email"><s:fielderror fieldName="email"></s:fielderror>
 								</td>
 							</tr>
 							<tr>
