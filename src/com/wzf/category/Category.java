@@ -1,8 +1,14 @@
 package com.wzf.category;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.wzf.categorysecond.CategorySecond;
+
 public class Category {
 	private int cid;
 	private String cname;
+	private Set<CategorySecond> categorySeconds=new HashSet<CategorySecond>();
 	public int getCid() {
 		return cid;
 	}
@@ -14,6 +20,12 @@ public class Category {
 	}
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+	public Set<CategorySecond> getCategorySeconds() {
+		return categorySeconds;
+	}
+	public void setCategorySeconds(Set<CategorySecond> categorySeconds) {
+		this.categorySeconds = categorySeconds;
 	}
 	
 }

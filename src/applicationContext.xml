@@ -43,6 +43,7 @@
 				<value>com/wzf/user/User.hbm.xml</value>
 				<value>com/wzf/category/Category.hbm.xml</value>
 				<value>com/wzf/product/Product.hbm.xml</value>
+				<value>com/wzf/categorysecond/CategorySecond.hbm.xml</value>
 			</list>
 		</property>
 <!-- 		<property name="mappingDirectoryLocations"> -->
@@ -61,6 +62,10 @@
 		<property name="userService" ref="userService"></property>
 	</bean>
 	<bean id="checkImgAction" class="com.wzf.user.CheckImgAction"></bean>
+	<bean id="productAction" class="com.wzf.product.ProductAction">
+		<property name="productService" ref="productService"></property>
+		<property name="categoryService" ref="categoryService"></property>
+	</bean>
 	
 	<!-- 注册Service -->
 	<bean id="userService" class="com.wzf.user.UserService">

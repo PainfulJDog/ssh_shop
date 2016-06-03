@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
 <div class="container header">
 	<div class="span5">
 		<div class="logo">
@@ -66,7 +65,7 @@
 					</li>
 					<s:iterator var="c" value="#session.categoryList">
 						<li>
-							<a href="./蔬菜分类.htm"><s:property value="#c.cname"/></a>
+							<a href="${pageContext.request.contextPath}/product_findByCid.action?cid=<s:property value="cid"/>&currentPage=1"><s:property value="cname"/></a>
 							|
 						</li>
 					</s:iterator>

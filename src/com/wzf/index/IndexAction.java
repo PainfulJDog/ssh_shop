@@ -14,6 +14,10 @@ import com.wzf.product.ProductService;
 public class IndexAction extends ActionSupport {
 	private CategoryService categoryService;
 	private ProductService productService;
+	//热门商品集合，提供getter
+	private List<Product>hotProductList;
+	//最新商品集合，提供getter
+	private List<Product> latestProductList;
 	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
@@ -21,6 +25,14 @@ public class IndexAction extends ActionSupport {
 
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
+	}
+
+	public List<Product> getHotProductList() {
+		return hotProductList;
+	}
+
+	public List<Product> getLatestProductList() {
+		return latestProductList;
 	}
 
 	public String index(){
@@ -31,9 +43,9 @@ public class IndexAction extends ActionSupport {
 //		ServletActionContext.getRequest().getSession().setAttribute("categoryList", categoryList);
 		
 		//查询热门商品
-		List<Product>hotProductList=productService.findHotProducts();
+		hotProductList=productService.findHotProducts();
 		//查询最新商品
-		List<Product>latestProductList=productService.findLatestProducts();
+		latestProductList=productService.findLatestProducts();
 		return "index";
 	}
 }

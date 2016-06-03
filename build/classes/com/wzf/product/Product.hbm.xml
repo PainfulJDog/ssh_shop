@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-6-2 16:40:38 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2016-6-3 10:18:35 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.wzf.product.Product" table="PRODUCT">
         <id name="pid" type="java.lang.Integer">
@@ -26,8 +26,10 @@
         <property name="is_hot" type="java.lang.Integer">
             <column name="IS_HOT" />
         </property>
-        <property name="pdate" type="date">
+        <property name="pdate" type="java.util.Date">
             <column name="PDATE" />
         </property>
+        
+        <many-to-one name="categorySecond" class="com.wzf.categorysecond.CategorySecond" column="CSID"></many-to-one>
     </class>
 </hibernate-mapping>
