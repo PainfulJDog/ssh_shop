@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 public class UserAction extends ActionSupport implements ModelDriven<User> {
 	private UserService userService;
 	private User user=new User();
+	private String checkCode;//接收页面上用户输入的验证码（要有setter）
 	@Override
 	public User getModel() {
 		return user;
@@ -23,6 +24,11 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+	
+	public void setCheckCode(String checkCode) {
+		this.checkCode = checkCode;
+	}
+
 	/**
 	 * 从主页跳转到注册页面
 	 * @return
@@ -36,6 +42,12 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 */
 	@InputConfig(resultName="registerInput")
 	public String register(){
+		//从session中获取验证码的值
+		String checkCodeFromSession=(String) ServletActionContext.getRequest().getSession().getAttribute("checkCode");
+		if(checkCode==null|| !checkCode.equalsIgnoreCase(checkCodeFromSession)){
+			this.addActionError("验证码错误！");
+			return "registerInput";
+		}
 		userService.register(user);
 		this.addActionMessage("注册成功！请去邮箱激活！");
 		return "registerSuccess";
@@ -122,5 +134,30 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		}
 		
 		return NONE;
+	}
+	/**
+	 * 注册时，异步校验验证吗是否输入正确
+	 * @return
+	 * @throws IOException
+	 */
+	public String checkCheckCode() throws IOException{
+		HttpServletResponse response=ServletActionContext.getResponse();
+		response.setContentType("text/html;charset=utf-8");
+		String checkCodeFromSession=(String) ServletActionContext.getRequest().getSession().getAttribute("checkCode");
+		if(checkCode==null|| !checkCode.equalsIgnoreCase(checkCodeFromSession)){
+			response.getWriter().println("<font color='red'>验证吗输入有误！</font>");
+		}else{
+			response.getWriter().println("<font color='green'>验证码输入正确！</font>");
+		}
+		return NONE;
+		
+	}
+	/**
+	 * 用户注销动作
+	 * @return
+	 */
+	public String logout(){
+		ServletActionContext.getRequest().getSession().invalidate();
+		return "logoutSuccess";
 	}
 }

@@ -80,121 +80,22 @@
 
 // 		return xmlHttp;
 // 	}
-
+	function checkImgChange(){
+		$("#checkImg").attr('src',"${pageContext.request.contextPath}/checkImg.action?timestamp="+new Date().getTime());
+// 		var img=document.getElementById("checkImg");
+// 		img.src="${pageContext.request.contextPath}/checkImg.action?timestamp="+new Date().getTime();
+	}
+	function checkCheckCode(){
+		var checkCode=$("#checkCode").val();
+		$("#span_checkCheckCode").load("${pageContext.request.contextPath}/user_checkCheckCode.action?timestamp="+new Date().getTime(),{'checkCode':checkCode});
+		}
 </script>
 </head>
 <body>
-<div class="container header">
-	<div class="span5">
-		<div class="logo">
-			<a href="http://localhost:8080/mango/">
-				<img src="${pageContext.request.contextPath}/resources/image/r___________renleipic_01/logo.gif" alt="传智播客">
-			</a>
-		</div>
-	</div>
-	<div class="span9">
-<div class="headerAd">
-					<img src="${pageContext.request.contextPath}/resources/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障">
-</div>	</div>
-	<div class="span10 last">
-		<div class="topNav clearfix">
-			<ul>
-				<li id="headerLogin" class="headerLogin" style="display: list-item;">
-					<a href="${pageContext.request.contextPath}/user_loginPage.action">登录</a>|
-				</li>
-				<li id="headerRegister" class="headerRegister" style="display: list-item;">
-					<a href="${pageContext.request.contextPath}/user_registerPage.action">注册</a>|
-				</li>
-				<li id="headerUsername" class="headerUsername"></li>
-				<li id="headerLogout" class="headerLogout">
-					<a href="./index.htm" >[退出]</a>|
-				</li>
-						<li>
-							<a>会员中心</a>
-							|
-						</li>
-						<li>
-							<a>购物指南</a>
-							|
-						</li>
-						<li>
-							<a>关于我们</a>
-							
-						</li>
-			</ul>
-		</div>
-		<div class="cart">
-			<a href="./购物车.htm">购物车</a>
-		</div>
-			<div class="phone">
-				客服热线:
-				<strong>96008/53277764</strong>
-			</div>
-	</div>
-	<div class="span24">
-		<ul class="mainNav">
-					<li>
-						<a href="./index.htm">首页</a>
-						|
-					</li>
-					<li>
-						<a href="./蔬菜分类.htm">定制套餐</a>
-						|
-					</li>
-					<li>
-						<a >安全频道</a>
-						|
-					</li>
-					<li>
-						<a>亿家卡</a>
-						|
-					</li>
-					<li>
-						<a >蔬菜基地</a>
-						|
-					</li>
-					<li>
-						<a>节气养生</a>
-						|
-					</li>
-					<li>
-						<a>便民服务</a>
-						|
-					</li>
-					
-		</ul>
-	</div>
-	<div class="span24">
-		<div class="tagWrap">
-			<ul class="tag">
-						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/hot.gif) right no-repeat;">
-							<a >热销</a>
-						</li>
-						<li class="icon" style="background: url(http://storage.shopxx.net/demo-image/3.0/tag/new.gif) right no-repeat;">
-							<a>最新</a>
-						</li>
-			</ul>
-			<div class="hotSearch">
-					热门搜索:
-						<a >水蜜桃</a>
-						<a>西瓜</a>
-						<a>紫薯</a>
-						<a>大米</a>
-						<a>玉米</a>
-						<a>茄子</a>
-						<a>辣椒</a>
-						<a>圣女果</a>
-						<a>鱿鱼丝</a>
-			</div>
-			<div class="search">
-				<form id="productSearchForm" method="get">
-					<input name="keyword" class="keyword" value="商品搜索" maxlength="30">
-					<button type="submit">搜索</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>	<div class="container register">
+<%@include file="/WEB-INF/jsp/header.jsp" %>
+<%-- <jsp:include page="/WEB-INF/jsp/header.jsp" ></jsp:include>
+使用jsp动作要导入s标签 --%>
+<div class="container register">
 		<div class="span24">
 			<div class="wrap">
 				<div class="main clearfix">
@@ -232,7 +133,7 @@
 									<span class="requiredField">*</span>E-mail:
 								</th>
 								<td>
-									<input type="text" id="email" name="email" class="text" maxlength="200" onblur="checkEmail();"><span id="span_email"><s:fielderror fieldName="email"></s:fielderror>
+									<input type="text" id="email" name="email" class="text" maxlength="200" onblur="checkEmail();"><span id="span_email"><s:fielderror fieldName="email"></s:fielderror></span>
 								</td>
 							</tr>
 							<tr>
@@ -280,7 +181,8 @@
 									</th>
 									<td>
 										<span class="fieldSet">
-											<input type="text" id="captcha" name="captcha" class="text captcha" maxlength="4" autocomplete="off"><img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/resources/image/captcha.jhtml" title="点击更换验证码">
+											<input type="text" id="checkCode" name="checkCode" class="text captcha" maxlength="4" autocomplete="off" onblur="checkCheckCode()"/><img id="checkImg" class="captchaImage" src="${pageContext.request.contextPath}/checkImg.action" title="点击更换验证码" onclick="checkImgChange()">
+											<span id="span_checkCheckCode"></span><s:actionerror />
 										</span>
 									</td>
 								</tr>

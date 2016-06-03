@@ -41,6 +41,8 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/wzf/user/User.hbm.xml</value>
+				<value>com/wzf/category/Category.hbm.xml</value>
+				<value>com/wzf/product/Product.hbm.xml</value>
 			</list>
 		</property>
 <!-- 		<property name="mappingDirectoryLocations"> -->
@@ -52,21 +54,35 @@
 	
 	<!-- 注册Action -->
 	<bean id="indexAction" class="com.wzf.index.IndexAction" scope="prototype">
+		<property name="categoryService" ref="categoryService"></property>
+		<property name="productService" ref="productService"></property>
 	</bean>
 	<bean id="userAction" class="com.wzf.user.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
+	<bean id="checkImgAction" class="com.wzf.user.CheckImgAction"></bean>
 	
 	<!-- 注册Service -->
 	<bean id="userService" class="com.wzf.user.UserService">
 		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<bean id="categoryService" class="com.wzf.category.CategoryService">
+		<property name="categoryDao" ref="categoryDao"></property>
+	</bean>
+	<bean id="productService" class="com.wzf.product.ProductService">
+		<property name="productDao" ref="productDao"></property>
 	</bean>
 	
 	<!-- 注册Dao -->
 	<bean id="userDao" class="com.wzf.user.UserDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+	<bean id="categoryDao" class="com.wzf.category.CategoryDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productDao" class="com.wzf.product.ProductDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>

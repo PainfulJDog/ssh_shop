@@ -12,7 +12,7 @@
     
     	<default-action-ref name="errorPage"></default-action-ref>
     	<action name="errorPage">
-    		<result>/error.jsp</result>
+    		<result>/WEB-INF/jsp/error.jsp</result>
     	</action>
         
         <action name="index" method="index" class="indexAction">
@@ -27,7 +27,10 @@
         	<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
         	<result name="loginInput">/WEB-INF/jsp/login.jsp</result>
         	<result name="loginSuccess" type="redirectAction">index</result>
+        	<result name="logoutSuccess" type="redirectAction">index</result>
         </action>
+        
+        <action name="checkImg" class="checkImgAction"></action>
     </package>
     
 </struts>
