@@ -285,11 +285,11 @@ $().ready(function() {
 						<s:iterator var="c" value="categoryList">
 							<dl>
 								<dt>
-									<a href="${pageContext.request.contextPath}/resources/image/蔬菜 - Powered By Mango Team.htm"><s:property value="#c.cname" /></a>
+									<a href="${pageContext.request.contextPath}/product_findByCid.action?cid=<s:property value="#c.cid" />&currentPage=1"><s:property value="#c.cname" /></a>
 								</dt>
 										<s:iterator var="cs" value="#c.categorySeconds">
 											<dd>
-												<a ><s:property value="#cs.csname" /></a>
+												<a href="${pageContext.request.contextPath}/product_findByCsid.action?csid=<s:property value="#cs.csid" />&currentPage=1"><s:property value="#cs.csname" /></a>
 											</dd>
 										</s:iterator>
 							</dl>

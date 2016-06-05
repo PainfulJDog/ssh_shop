@@ -19,6 +19,9 @@
 					<li id="headerLogin" class="headerLogin" style="display: list-item;">
 						<s:property value="#session.userFromDB.name"/>|
 					</li>
+					<li id="headerLogin" class="headerLogin" style="display: list-item;">
+						<a href="${pageContext.request.contextPath}/order_findByUid.action">我的订单</a>|
+					</li>
 					<li id="headerRegister" class="headerRegister" style="display: list-item;">
 						<a href="${pageContext.request.contextPath}/user_logout.action">注销</a>|
 					</li>
@@ -50,7 +53,7 @@
 			</ul>
 		</div>
 		<div class="cart">
-			<a  href="./购物车.htm">购物车</a>
+			<a  href="${pageContext.request.contextPath}/cart_accessCart.action">购物车</a>
 		</div>
 			<div class="phone">
 				客服热线:
@@ -85,15 +88,15 @@
 			</ul>
 			<div class="hotSearch">
 					热门搜索:
-						<a >水蜜桃</a>
-						<a>西瓜</a>
-						<a>紫薯</a>
-						<a>大米</a>
-						<a>玉米</a>
-						<a>茄子</a>
-						<a>辣椒</a>
-						<a>圣女果</a>
-						<a>鱿鱼丝</a>
+						<a >时尚女装</a>
+						<a>潮流大衣</a>
+						<a>男装</a>
+						<a>笔记本电脑</a>
+						<a>平板电脑</a>
+						<a>iphone18s plus</a>
+						<a>轻薄毛衣</a>
+						<a>牛仔裤</a>
+						<a>西装</a>
 			</div>
 			<div class="search">
 				<form id="productSearchForm" method="get">

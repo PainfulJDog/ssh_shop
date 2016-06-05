@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>京华亿家--大冬瓜</title>
+	<title>XX网上商城--商品详情</title>
 	<meta name="author" content="Mango Team">
 	<meta name="copyright" content="Mango">
 		<meta name="keywords" content="京华亿家--大冬瓜">
@@ -20,17 +20,19 @@
 </head>
 <body>
 <%@include file="/WEB-INF/jsp/header.jsp" %>
+<form action="${pageContext.request.contextPath}/cart_addToCart.action" method="post">
+<input type="hidden" name="pid" value="<s:property value="model.pid"/>"/>
 <div class="container productContent">
 		<div class="span6">
 			<div class="hotProductCategory">
 						<s:iterator var="c" value="categoryList">
 							<dl>
 								<dt>
-									<a href="${pageContext.request.contextPath}/resources/image/蔬菜 - Powered By Mango Team.htm"><s:property value="#c.cname" /></a>
+									<a href='${pageContext.request.contextPath}/product_findByCid.action?cid=<s:property value="#c.cid" />&currentPage=1'><s:property value="#c.cname" /></a>
 								</dt>
 										<s:iterator var="cs" value="#c.categorySeconds">
 											<dd>
-												<a ><s:property value="#cs.csname" /></a>
+												<a href="${pageContext.request.contextPath}/product_findByCsid.action?csid=<s:property value="#cs.csid" />&currentPage=1"><s:property value="#cs.csname" /></a>
 											</dd>
 										</s:iterator>
 							</dl>
@@ -87,7 +89,7 @@
 						<dl class="quantity">
 							<dt>购买数量:</dt>
 							<dd>
-								<input id="quantity" name="quantity" value="1" maxlength="4" onpaste="return false;" type="text">
+								<input id="count" name="count" value="1" maxlength="4" onpaste="return false;" type="text">
 								<div>
 									<span id="increase" class="increase">&nbsp;</span>
 									<span id="decrease" class="decrease">&nbsp;</span>
@@ -98,7 +100,7 @@
 							</dd>
 						</dl>
 					<div class="buy">
-							<input id="addCart" class="addCart" value="加入购物车" type="button">
+							<input id="addCart" class="addCart" value="加入购物车" type="submit">
 				
 					</div>
 				</div>
@@ -175,5 +177,6 @@
 		<div class="copyright">Copyright © 2005-2013 Mango商城 版权所有</div>
 	</div>
 </div>
+</form>
 </body>
 </html>

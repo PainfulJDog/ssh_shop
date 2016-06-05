@@ -1,5 +1,7 @@
 package com.wzf.categorysecond;
 
-public class CategorySecondAction {
+import com.opensymphony.xwork2.ActionSupport;
+
+public class CategorySecondAction extends ActionSupport {
 
 }

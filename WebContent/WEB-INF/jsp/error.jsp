@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>XX网上商城--出错了</title>
 </head>
 <body>
-<h1>出错了！</h1>
+<h1>出错了！</h1><br>
+<h2>前台</h2>
+<a target="_blank" href="http://localhost:8080/ssh_shop/index.action">进入xx网上商城</a><br/>
+<h2>后台</h2>
+<a target="_blank"  href="http://localhost:8080/ssh_shop/admin_tologin.action">进入后台管理</a>
 </body>
 </html>

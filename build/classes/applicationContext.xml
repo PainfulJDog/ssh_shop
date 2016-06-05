@@ -44,6 +44,9 @@
 				<value>com/wzf/category/Category.hbm.xml</value>
 				<value>com/wzf/product/Product.hbm.xml</value>
 				<value>com/wzf/categorysecond/CategorySecond.hbm.xml</value>
+				<value>com/wzf/order/Order.hbm.xml</value>
+				<value>com/wzf/order/OrderItem.hbm.xml</value>
+				<value>com/wzf/admin/Administrator.hbm.xml</value>
 			</list>
 		</property>
 <!-- 		<property name="mappingDirectoryLocations"> -->
@@ -61,10 +64,19 @@
 	<bean id="userAction" class="com.wzf.user.UserAction" scope="prototype">
 		<property name="userService" ref="userService"></property>
 	</bean>
-	<bean id="checkImgAction" class="com.wzf.user.CheckImgAction"></bean>
-	<bean id="productAction" class="com.wzf.product.ProductAction">
+	<bean id="checkImgAction" class="com.wzf.user.CheckImgAction" scope="prototype"></bean>
+	<bean id="productAction" class="com.wzf.product.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
 		<property name="categoryService" ref="categoryService"></property>
+	</bean>
+	<bean id="cartAction" class="com.wzf.cart.CartAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<bean id="orderAction" class="com.wzf.order.OrderAction" scope="prototype">
+		<property name="orderService" ref="orderService"></property>
+	</bean>
+	<bean id="adminAction" class="com.wzf.admin.AdminAction" scope="prototype">
+		<property name="adminService" ref="adminService"></property>
 	</bean>
 	
 	<!-- 注册Service -->
@@ -77,6 +89,13 @@
 	<bean id="productService" class="com.wzf.product.ProductService">
 		<property name="productDao" ref="productDao"></property>
 	</bean>
+	<bean id="orderService" class="com.wzf.order.OrderService">
+		<property name="orderDao" ref="orderDao"></property>
+	</bean>
+	<bean id="adminService" class="com.wzf.admin.AdminService">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	
 	
 	<!-- 注册Dao -->
 	<bean id="userDao" class="com.wzf.user.UserDao">
@@ -88,6 +107,14 @@
 	<bean id="productDao" class="com.wzf.product.ProductDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="orderDao" class="com.wzf.order.OrderDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminDao" class="com.wzf.admin.AdminDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>

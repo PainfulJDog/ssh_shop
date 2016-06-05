@@ -4,19 +4,24 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-<!--  
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />-->
+ 
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
 
     <package name="default" namespace="/" extends="struts-default">
-    
     	<default-action-ref name="errorPage"></default-action-ref>
-    	<action name="errorPage">
-    		<result>/WEB-INF/jsp/error.jsp</result>
-    	</action>
+    	
+        <global-results>
+        	 <result name="msg">/WEB-INF/jsp/msg.jsp</result>
+        </global-results>
+    		
+        <action name="errorPage">
+        	<result>/WEB-INF/jsp/error.jsp</result>
+        </action>
         
-        <action name="index" method="index" class="indexAction">
+        <action name="index" class="indexAction">
             <result name="index">/WEB-INF/jsp/index.jsp</result>
+        	 <result>/WEB-INF/jsp/error.jsp</result>
         </action>
         
         <action name="user_*" method="{1}" class="userAction">
@@ -35,8 +40,31 @@
         <action name="product_*" method="{1}" class="productAction">
         	<result name="findByCidSuccess">/WEB-INF/jsp/listByCategory.jsp</result>
         	<result name="findByPidSuccess">/WEB-INF/jsp/detailsByPid.jsp</result>
+        	<result name="findByCsidSuccess">/WEB-INF/jsp/listByCategorySecond.jsp</result>
         </action>
         
+        <action name="cart_*" method="{1}" class="cartAction">
+        	<result name="addToCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="clearCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="removeFromCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="accessCartSuccess">/WEB-INF/jsp/cart.jsp</result>
+        </action>
+        
+        <action name="order_*" method="{1}" class="orderAction">
+        	<result name="cteateOrderSuccess">/WEB-INF/jsp/order.jsp</result>
+        	<result name="findByUidSuccess">/WEB-INF/jsp/orderList.jsp</result>
+        	<result name="findByOidSuccess">/WEB-INF/jsp/order.jsp</result>
+        </action>
+        
+        <action name="admin_*" method="{1}" class="adminAction">
+        	<result name="login">/WEB-INF/admin/index.jsp</result>
+        	<result name="top">/WEB-INF/admin/top.jsp</result>
+        	<result name="left">/WEB-INF/admin/left.jsp</result>
+        	<result name="main">/WEB-INF/admin/welcome.jsp</result>
+        	<result name="bottom">/WEB-INF/admin/bottom.jsp</result>
+        	<result name="toHomePage">/WEB-INF/admin/home.jsp</result>
+        	<result name="loginSuccess" type="redirect">/admin_toHomePage.action</result>
+        </action>
     </package>
     
 </struts>

@@ -22,7 +22,6 @@ public class ProductService {
 	}
 
 	public Page<Product> findByPage(int cid, int currentPage) {
-		// TODO Auto-generated method stub
 		int numPerPage=12;
 		int totalPages=0;
 		Page<Product> page=new Page<Product>();
@@ -47,6 +46,29 @@ public class ProductService {
 	public Product findByPid(Integer pid) {
 		// TODO Auto-generated method stub
 		return productDao.findByPid(pid);
+	}
+
+	public Page findByCsid(int csid, int currentPage) {
+		int numPerPage=8;
+		int totalPages=0;
+		Page<Product> page=new Page<Product>();
+		page.setCurrentPage(currentPage);
+		page.setNumPerPage(numPerPage);
+		//查当前一级分类下的总记录数
+		int totalRecords=productDao.findCountByCsid(csid);
+		page.setTotalRecords(totalRecords);
+		//计算总页数
+		if(totalRecords%numPerPage==0){
+			totalPages=totalRecords/numPerPage;
+		}else{
+			totalPages=totalRecords/numPerPage+1;
+		}
+		page.setTotalPages(totalPages);
+		
+		int begin=(currentPage-1)*numPerPage;
+		List<Product> list=productDao.findByPageAndCsid(csid,begin,numPerPage);
+		page.setList(list);
+		return page;
 	}
 	
 }

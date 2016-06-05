@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-6-3 10:18:35 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2016-6-4 15:21:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.wzf.category.Category" table="CATEGORY">
         <id name="cid" type="int">
@@ -11,7 +11,7 @@
         <property name="cname" type="java.lang.String">
             <column name="CNAME" />
         </property>
-        <set name="categorySeconds" order-by="csid desc" table="CATEGORYSECOND"  lazy="false">
+        <set name="categorySeconds" table="CATEGORYSECOND" order-by="csid" lazy="false">
             <key>
                 <column name="CID" />
             </key>

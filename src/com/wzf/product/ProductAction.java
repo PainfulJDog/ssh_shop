@@ -16,11 +16,16 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 	private ProductService productService;
 	private Page page;
 	private Product product=new Product();
+	private int csid;
 
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
 	
+	public int getCid() {
+		return cid;
+	}
+
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
@@ -42,6 +47,14 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		return product;
 	}
 	
+	public void setCsid(int csid) {
+		this.csid = csid;
+	}
+
+	public int getCsid() {
+		return csid;
+	}
+
 	public String findByCid(){
 		//查询所有一级分类
 		List<Category> categoryList=categoryService.findAllCategories();
@@ -59,6 +72,18 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		product=productService.findByPid(product.getPid());
 		return "findByPidSuccess";
 	}
-
+	/**
+	 * 根据二级分类id查询商品
+	 * @return
+	 */
+	public String findByCsid(){
+		//查询所有一级分类
+		List<Category> categoryList=categoryService.findAllCategories();
+		//获得值栈
+		ActionContext.getContext().getValueStack().set("categoryList", categoryList);
+		
+		page=productService.findByCsid(csid,currentPage);
+		return "findByCsidSuccess";
+	}
 
 }

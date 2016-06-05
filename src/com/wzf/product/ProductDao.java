@@ -25,7 +25,6 @@ public class ProductDao extends HibernateDaoSupport {
 	}
 
 	public List<Product> findLatestProducts() {
-		// TODO Auto-generated method stub
 		String hql="from Product order by pdate desc";
 		List<Product> list=this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, null, 0, 10));
 		return list;
@@ -38,9 +37,7 @@ public class ProductDao extends HibernateDaoSupport {
 	 * @return
 	 */
 	public Integer findCountByCid(int cid) {
-		// TODO Auto-generated method stub
-//		String hql="select count(*) from Product p join p.categotySecond cs on cs.category.cid=?";
-//		String hql="select count(*) from Product p join p.categotySecond cs join cs.category c on c.cid=?";
+//		String hql="select count(*) from Product p join p.categotySecond cs join cs.category c where c.cid=?";
 		String hql="select count(*) from Product p,CategorySecond cs where p.categorySecond=cs and cs.category.cid=?";
 		List<Long> list=(List<Long>) this.getHibernateTemplate().find(hql, cid);
 		System.out.println("==============================:"+list.get(0).intValue());
@@ -48,15 +45,40 @@ public class ProductDao extends HibernateDaoSupport {
 	}
 
 	public List<Product> findByPage(int cid, int begin, int numPerPage) {
-		// TODO Auto-generated method stub
-		String hql="select p from Product p,CategorySecond cs where p.categorySecond=cs and cs.category.cid=?";
-		List<Product> list=this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{cid}, begin, begin+numPerPage));
+		String hql = "select p from Product p join p.categorySecond cs join cs.category c where c.cid = ?";
+//		String hql="select p from Product p,CategorySecond cs where p.categorySecond=cs and cs.category.cid=?";
+//		String hql="select p from Product p where 1=?";
+		List<Product> list=this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{cid}, begin,numPerPage));
 		return list;
 	}
 
 	public Product findByPid(Integer pid) {
 		// TODO Auto-generated method stub
 		return this.getHibernateTemplate().get(Product.class, pid);
+	}
+
+	/**
+	 * 统计某个二级分类下的记录总数，用于计算总页数等信息
+	 * @param csid
+	 * @return
+	 */
+	public int findCountByCsid(int csid) {
+		// TODO Auto-generated method stub
+		String hql="select count(*) from Product p join p.categorySecond cs where cs.csid=?";
+		
+		List<Long> list=(List<Long>) this.getHibernateTemplate().find(hql, csid);
+		if(list.size()!=0){
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
+
+	public List<Product> findByPageAndCsid(int csid, int begin, int numPerPage) {
+		String hql1="select p from Product p,CategorySecond cs where p.categorySecond=cs and cs.csid=1";
+		String hql="select p from Product p join p.categorySecond cs where cs.csid=?";
+		List<Product> listTest=(List<Product>) this.getHibernateTemplate().find(hql1);
+		List<Product> list=this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{csid}, begin,numPerPage));
+		return list;
 	}
 
 	

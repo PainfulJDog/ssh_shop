@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-6-3 10:18:35 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2016-6-4 15:21:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.wzf.categorysecond.CategorySecond" table="CATEGORYSECOND">
         <id name="csid" type="java.lang.Integer">
@@ -14,7 +14,7 @@
         <many-to-one name="category" class="com.wzf.category.Category" >
             <column name="CID" />
         </many-to-one>
-        <set name="products" table="PRODUCT"  lazy="false">
+        <set name="products" table="PRODUCT" >
             <key>
                 <column name="CSID" />
             </key>

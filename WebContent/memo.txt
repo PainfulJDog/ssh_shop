@@ -1,0 +1,4 @@
+struts.xml中标签的优先级：
+<default-action-ref name="errorPage"></default-action-ref>
+<global-results></global-results>
+<action></action>
