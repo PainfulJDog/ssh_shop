@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.wzf.cart.Cart;
 import com.wzf.cart.CartItem;
 import com.wzf.user.User;
+import com.wzf.utils.Page;
 import com.wzf.utils.PaymentUtil;
 
 public class OrderAction extends ActionSupport{
@@ -42,6 +43,9 @@ public class OrderAction extends ActionSupport{
 	private String rq_SourceFee;
 	private String rq_TargetFee;
 	private String hmac;
+	//后台查询需要使用的属性
+	private int currentPage;
+	private int state;
 	
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
@@ -137,6 +141,14 @@ public class OrderAction extends ActionSupport{
 
 	public void setHmac(String hmac) {
 		this.hmac = hmac;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 
 	/**
@@ -258,5 +270,36 @@ public class OrderAction extends ActionSupport{
 	public String findByOid(){
 		order=orderService.findByOid(oid);
 		return "findByOidSuccess";
+	}
+	/**
+	 * 后台按状态查询订单
+	 */
+	public String adminFindByState(){
+		Page<Order> page=orderService.findByPage(currentPage,state);
+		ActionContext.getContext().getValueStack().set("page", page);
+		return "adminFindByStateSuccess";
+	}
+	/**
+	 * 后台查询所有订单
+	 */
+	public String adminFindAll(){
+		Page<Order> page=orderService.findByPage(currentPage);
+		ActionContext.getContext().getValueStack().set("page", page);
+		return "adminFindAllSuccess";
+	}
+	/**
+	 * 后台修改订单状态
+	 */
+	public String adminUpdateState(){
+		order=orderService.findByOid(oid);
+		order.setState(3);
+		orderService.update(order);
+		return "adminUpdateStateSuccess";
+	}
+	public String updateState(){
+		order=orderService.findByOid(oid);
+		order.setState(4);
+		orderService.update(order);
+		return "updateStateSuccess";
 	}
 }

@@ -35,6 +35,9 @@ public class AdminAction	extends ActionSupport implements ModelDriven<Administra
 	public String bottom(){
 		return "bottom";
 	}
+	public String welcome(){
+		return "welcome";
+	}
 	
 	
 	/**
@@ -52,5 +55,7 @@ public class AdminAction	extends ActionSupport implements ModelDriven<Administra
 	public String toHomePage(){
 		return"toHomePage";
 	}
-
+	public String toAddCategory(){
+		return "toAddCategory";
+	}
 }

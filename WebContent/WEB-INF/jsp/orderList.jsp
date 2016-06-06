@@ -41,7 +41,7 @@
 							金额：<s:property value="#order.total"/>
 							状态：<s:if test="#order.state==1"><a href="${pageContext.request.contextPath}/order_findByOid?oid=<s:property value="#order.oid"/> "><font color="red">待付款，点击去付款</></a></s:if>
 									<s:elseif test="#order.state==2"><font color="green">已付款</font></s:elseif>
-									<s:elseif test="#order.state==3"><a href="#">确认收货</a></s:elseif>
+									<s:elseif test="#order.state==3"><a href="${pageContext.request.contextPath}/order_updateState.action?oid=<s:property value="#order.oid"/>">确认收货</a></s:elseif>
 									<s:elseif test="#order.state==4">已收货，订单完成</s:elseif>
 							</th>
 					</tr>

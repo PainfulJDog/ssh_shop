@@ -13,8 +13,26 @@ public class CategoryService {
 	}
 
 	public List<Category> findAllCategories() {
-		// TODO Auto-generated method stub
 		return categoryDao.findAllCategories();
+	}
+
+	public void save(Category category) {
+		categoryDao.save(category);
+	}
+
+	public void delete(Category category) {
+		// TODO Auto-generated method stub
+		categoryDao.delete(category);
+	}
+
+	public Category findByCid(int cid) {
+		// TODO Auto-generated method stub
+		return categoryDao.findByCid(cid);
+	}
+
+	public void update(Category category) {
+		categoryDao.update(category);
+		
 	}
 	
 }

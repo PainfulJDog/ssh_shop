@@ -6,15 +6,20 @@
 <struts>
  
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.devMode" value="true" />
+    <constant name="struts.devMode" value="false" />
 
     <package name="default" namespace="/" extends="struts-default">
+    	<interceptors>
+    		<interceptor name="loginInterceptor" class="com.wzf.interceptor.LoginInterceptor"></interceptor>
+    	</interceptors>
+    
     	<default-action-ref name="errorPage"></default-action-ref>
     	
         <global-results>
         	 <result name="msg">/WEB-INF/jsp/msg.jsp</result>
+        	 <result name="loginBack">/WEB-INF/admin/index.jsp</result>
         </global-results>
-    		
+    	
         <action name="errorPage">
         	<result>/WEB-INF/jsp/error.jsp</result>
         </action>
@@ -41,6 +46,14 @@
         	<result name="findByCidSuccess">/WEB-INF/jsp/listByCategory.jsp</result>
         	<result name="findByPidSuccess">/WEB-INF/jsp/detailsByPid.jsp</result>
         	<result name="findByCsidSuccess">/WEB-INF/jsp/listByCategorySecond.jsp</result>
+        	<result name="adminFindAllSuccess">/WEB-INF/admin/product/list.jsp</result>
+        	<result name="addPageSuccess">/WEB-INF/admin/product/add.jsp</result>
+        	<result name="saveSuccess" type="redirect">product_adminFindAll.action?currentPage=1</result>
+        	
+        	<interceptor-ref name="loginInterceptor">
+        		<param name="includeMethods">adminFindAll,addPage,save</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         
         <action name="cart_*" method="{1}" class="cartAction">
@@ -54,6 +67,15 @@
         	<result name="cteateOrderSuccess">/WEB-INF/jsp/order.jsp</result>
         	<result name="findByUidSuccess">/WEB-INF/jsp/orderList.jsp</result>
         	<result name="findByOidSuccess">/WEB-INF/jsp/order.jsp</result>
+        	<result name="adminFindAllSuccess">/WEB-INF/admin/order/list.jsp</result>
+        	<result name="adminFindByStateSuccess">/WEB-INF/admin/order/list.jsp</result>
+        	<result name="adminUpdateStateSuccess" type="redirect">/order_adminFindAll.action?currentPage=1</result>
+        	<result name="updateStateSuccess" type="redirect">/order_findByUid.action</result>
+        	
+        	<interceptor-ref name="loginInterceptor">
+        		<param name="includeMethods">adminFindAll,adminFindByState,adminUpdateState</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         
         <action name="admin_*" method="{1}" class="adminAction">
@@ -61,9 +83,40 @@
         	<result name="top">/WEB-INF/admin/top.jsp</result>
         	<result name="left">/WEB-INF/admin/left.jsp</result>
         	<result name="main">/WEB-INF/admin/welcome.jsp</result>
+        	<result name="welcome">/WEB-INF/admin/welcome.jsp</result>
         	<result name="bottom">/WEB-INF/admin/bottom.jsp</result>
         	<result name="toHomePage">/WEB-INF/admin/home.jsp</result>
         	<result name="loginSuccess" type="redirect">/admin_toHomePage.action</result>
+        	<result name="toAddCategory">/WEB-INF/admin/category/add.jsp</result>
+        	
+        	<interceptor-ref name="loginInterceptor">
+        		<param name="includeMethods">top,left,main,welcome,bottom,toHomePage,toAddCategory</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        
+        <action name="category_*" method="{1}" class="categoryAction">
+        	<result name="adminFindAllSuccess">/WEB-INF/admin/category/list.jsp</result>
+        	<result name="saveSuccess" type="redirect">/category_adminFindAll</result>
+        	<result name="deleteSuccess" type="redirect">/category_adminFindAll</result>
+        	<result name="updateSuccess" type="redirect">/category_adminFindAll</result>
+        	<result name="toEditSuccess" >/WEB-INF/admin/category/edit.jsp</result>
+        	
+        	<interceptor-ref name="loginInterceptor">
+        		<param name="includeMethods">adminFindAll,toEdit,add,delete,update</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        
+        <action name="categorySecond_*" method="{1}" class="categorySecondAction">
+        	<result name="adminFindAllSuccess">/WEB-INF/admin/categorysecond/list.jsp</result>
+        	<result name="toAddCategorySecondSuccess">/WEB-INF/admin/categorysecond/add.jsp</result>
+        	<result name="addSuccess" type="redirect">/categorySecond_adminFindAll.action?currentPage=1</result>
+        	
+        	<interceptor-ref name="loginInterceptor">
+        		<param name="includeMethods">adminFindAll,toAddCategorySecond,add</param>
+        	</interceptor-ref>
+        	<interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
     </package>
     

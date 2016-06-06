@@ -68,6 +68,7 @@
 	<bean id="productAction" class="com.wzf.product.ProductAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
 		<property name="categoryService" ref="categoryService"></property>
+		<property name="categorySecondService" ref="categorySecondService"></property>
 	</bean>
 	<bean id="cartAction" class="com.wzf.cart.CartAction" scope="prototype">
 		<property name="productService" ref="productService"></property>
@@ -77,6 +78,13 @@
 	</bean>
 	<bean id="adminAction" class="com.wzf.admin.AdminAction" scope="prototype">
 		<property name="adminService" ref="adminService"></property>
+	</bean>
+	<bean id="categoryAction" class="com.wzf.category.CategoryAction" scope="prototype">
+		<property name="categoryService" ref="categoryService"></property>
+	</bean>
+	<bean id="categorySecondAction" class="com.wzf.categorysecond.CategorySecondAction" scope="prototype">
+		<property name="categorySecondService" ref="categorySecondService"></property>
+		<property name="categoryService" ref="categoryService"></property>
 	</bean>
 	
 	<!-- 注册Service -->
@@ -95,7 +103,9 @@
 	<bean id="adminService" class="com.wzf.admin.AdminService">
 		<property name="adminDao" ref="adminDao"></property>
 	</bean>
-	
+	<bean id="categorySecondService" class="com.wzf.categorysecond.CategorySecondService">
+		<property name="categorySecondDao" ref="categorySecondDao"></property>
+	</bean>
 	
 	<!-- 注册Dao -->
 	<bean id="userDao" class="com.wzf.user.UserDao">
@@ -113,7 +123,9 @@
 	<bean id="adminDao" class="com.wzf.admin.AdminDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+	<bean id="categorySecondDao" class="com.wzf.categorysecond.CategorySecondDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
